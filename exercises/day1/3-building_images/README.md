@@ -27,10 +27,10 @@ If you still have the image from the previous "Changing Images", let's also remo
 ```
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-steven/ping         latest              78ba830008a6        45 minutes ago      159MB
+steve/ping:v1         latest              78ba830008a6        45 minutes ago      159MB
 ubuntu              16.04               6a2f32de169d        4 days ago          117MB
 $ docker rmi 78b
-Untagged: steven/ping:latest
+Untagged: steve/ping:v1:latest
 Deleted: sha256:78ba830008a61a09f9eae8ca4ead0966ff501457c23df0f635e0651253b3d0e3
 Deleted: sha256:94b1207f7fb25468a3e1c16e604f8e65d9ed4df783fa057c368b635d7b086e39
 $
@@ -49,6 +49,7 @@ Instead, we'll use `Dockerfile`. The `Dockerfile` is a "recipe" of sorts, that c
     $ touch Dockerfile
     $
     ```
+    >> You can use vscode to create the file as well
 
 2. Open `Dockerfile` with your favorite text editor.
 
@@ -105,7 +106,7 @@ To build Docker images from Dockerfiles, we use the `docker build` command. The 
     Running the following builds and tags the image:
 
     ```
-    $ docker build -t 'steven/ping' .
+    $ docker build -t 'steve/ping:v1' .
     Sending build context to Docker daemon    190kB
     Step 1/4 : FROM ubuntu:16.04
      ---> 6a2f32de169d
@@ -140,7 +141,7 @@ To build Docker images from Dockerfiles, we use the `docker build` command. The 
     We can see this caching behavior in action if we simply rerun the same command again:
 
     ```
-    $ docker build -t 'steven/ping' .
+    $ docker build -t 'steve/ping:v1' .
     Sending build context to Docker daemon    191kB
     Step 1/4 : FROM ubuntu:16.04
      ---> 6a2f32de169d
@@ -162,7 +163,7 @@ To build Docker images from Dockerfiles, we use the `docker build` command. The 
     ```
     $ docker images
     REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-    steven/ping         latest              918648f00b92        9 minutes ago       159MB
+    steve/ping:v1         latest              918648f00b92        9 minutes ago       159MB
     ubuntu              16.04               6a2f32de169d        4 days ago          117MB
     ```
 
@@ -187,7 +188,7 @@ Then running `build` again yields...
 ```
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-steven/ping         latest              912bc1c7c059        4 seconds ago       159MB
+steve/ping:v1         latest              912bc1c7c059        4 seconds ago       159MB
 ubuntu              16.04               6a2f32de169d        4 days ago          117MB
 $
 ```
@@ -216,7 +217,7 @@ Then after rerunning `build`, our images now like:
 ```
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-steven/ping         latest              622e555950e0        12 seconds ago      121MB
+steve/ping:v1         latest              622e555950e0        12 seconds ago      121MB
 ubuntu              16.04               6a2f32de169d        4 days ago          117MB
 $
 ```
@@ -253,10 +254,10 @@ RUN apt-get update \
 CMD ["sh", "-c", "ping $PING_TARGET"]
 ```
 
-These new directives mean that our image when run with `docker run -it steven/ping` will automatically run `ping google.com`.
+These new directives mean that our image when run with `docker run -it steve/ping:v1` will automatically run `ping google.com`.
 
 ```
-$ docker run -it steven/ping
+$ docker run -it steve/ping:v1
 PING google.com (172.217.10.46) 56(84) bytes of data.
 64 bytes from lga34s13-in-f14.1e100.net (172.217.10.46): icmp_seq=1 ttl=37 time=0.300 ms
 64 bytes from lga34s13-in-f14.1e100.net (172.217.10.46): icmp_seq=2 ttl=37 time=0.373 ms
