@@ -15,7 +15,7 @@ The `docker` CLI tool also has integration with DockerHub. In order to use certa
 ```
 $ docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
-Username: delner
+Username: YOURUSERNAME
 Password: 
 Login Succeeded
 $
@@ -48,10 +48,10 @@ $ docker images
 REPOSITORY                                                TAG                 IMAGE ID            CREATED             SIZE
 ping                                                      latest              a980ae1c79ea        2 minutes ago       121MB
 ubuntu                                                    16.04               6a2f32de169d        5 days ago          117MB
-$ docker tag ping delner/ping:1.0
+$ docker tag ping steven/ping:1.0
 $ docker images
 REPOSITORY                                                TAG                 IMAGE ID            CREATED             SIZE
-delner/ping                                               1.0                 a980ae1c79ea        5 minutes ago       121MB
+steven/ping                                               1.0                 a980ae1c79ea        5 minutes ago       121MB
 ping                                                      latest              a980ae1c79ea        5 minutes ago       121MB
 ubuntu                                                    16.04               6a2f32de169d        5 days ago          117MB
 $ 
@@ -64,7 +64,7 @@ $ docker rmi ping
 Untagged: ping:latest
 $ docker images
 REPOSITORY                                                TAG                 IMAGE ID            CREATED             SIZE
-delner/ping                                               1.0                 a980ae1c79ea        6 minutes ago       121MB
+steven/ping                                               1.0                 a980ae1c79ea        6 minutes ago       121MB
 ubuntu                                                    16.04               6a2f32de169d        5 days ago          117MB
 $ 
 ```
@@ -74,8 +74,8 @@ $
 To push an image, all you need to do is call `docker push` with the tag.
 
 ```
-$ docker push delner/ping:1.0
-The push refers to a repository [docker.io/delner/ping]
+$ docker push steven/ping:v1
+The push refers to a repository [docker.io/steven/ping]
 3b372b8ab44b: Pushed 
 ab4b9ad8d212: Mounted from library/ubuntu 
 57e913ee49e5: Mounted from library/ubuntu 
