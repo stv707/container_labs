@@ -10,7 +10,7 @@
 
 ### Exercises Day 1
 
-1. [Running and managing Docker containers and images](https://github.com/delner/docker-training/blob/master/exercises/basic/1-running_containers/README.md)
+1. [Running and managing Docker containers and images](https://github.com/stv707/container_labs/blob/main/exercises/day1/1-running_containers/README.md)
 2. [Changing images](https://github.com/delner/docker-training/blob/master/exercises/basic/2-changing_images/README.md)
 3. [Building your own images](https://github.com/delner/docker-training/blob/master/exercises/basic/3-building_images/README.md)
 4. [Sharing images](https://github.com/delner/docker-training/blob/master/exercises/basic/4-sharing_images/README.md)

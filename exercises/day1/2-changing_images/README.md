@@ -213,7 +213,7 @@ The Docker way is to create a new image. There are two ways to do this: 1) build
     Pass the container ID, an author, commit message, and give it the name `<DockerHub username>/ping`:
 
     ```
-    $ docker commit -a 'David Elner' -m 'Added ping utility.' 786 delner/ping
+    $ docker commit -a 'Steven Com My' -m 'Added ping utility.' 786 steven/ping
     sha256:78ba830008a61a09f9eae8ca4ead0966ff501457c23df0f635e0651253b3d0e3
     $ 
     ```
@@ -223,7 +223,7 @@ The Docker way is to create a new image. There are two ways to do this: 1) build
     ```
     $ docker images
     REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
-    delner/ping         latest              78ba830008a6        About a minute ago   159MB
+    steven/ping         latest              78ba830008a6        About a minute ago   159MB
     ubuntu              16.04               6a2f32de169d        4 days ago           117MB
     $
     ```
@@ -231,7 +231,7 @@ The Docker way is to create a new image. There are two ways to do this: 1) build
 3. Finally run your new image in a new container to see it in action!
 
     ```
-    $ docker run -it --rm delner/ping /bin/bash
+    $ docker run -it --rm steven/ping /bin/bash
     root@3ab21a456c9f:/# ping google.com
     PING google.com (172.217.4.206) 56(84) bytes of data.
     64 bytes from lga15s48-in-f14.1e100.net (172.217.4.206): icmp_seq=1 ttl=37 time=1.12 ms
