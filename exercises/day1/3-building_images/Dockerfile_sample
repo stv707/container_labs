@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-LABEL author="David Elner"
+LABEL author="Steven Com My"
 
 ENV PING_TARGET "google.com"
 

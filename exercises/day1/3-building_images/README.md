@@ -27,10 +27,10 @@ If you still have the image from the previous "Changing Images", let's also remo
 ```
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-delner/ping         latest              78ba830008a6        45 minutes ago      159MB
+steven/ping         latest              78ba830008a6        45 minutes ago      159MB
 ubuntu              16.04               6a2f32de169d        4 days ago          117MB
 $ docker rmi 78b
-Untagged: delner/ping:latest
+Untagged: steven/ping:latest
 Deleted: sha256:78ba830008a61a09f9eae8ca4ead0966ff501457c23df0f635e0651253b3d0e3
 Deleted: sha256:94b1207f7fb25468a3e1c16e604f8e65d9ed4df783fa057c368b635d7b086e39
 $
@@ -62,7 +62,7 @@ Instead, we'll use `Dockerfile`. The `Dockerfile` is a "recipe" of sorts, that c
 
     ```
     FROM ubuntu:16.04
-    LABEL author="David Elner"
+    LABEL author="Steven Com My"
     ```
 
 3. Then we'll need to add some commands to modify the image.
@@ -87,7 +87,7 @@ Instead, we'll use `Dockerfile`. The `Dockerfile` is a "recipe" of sorts, that c
 
     ```
     FROM ubuntu:16.04
-    LABEL author="David Elner"
+    LABEL author="Steven Com My"
 
     RUN apt-get update
 
@@ -105,11 +105,11 @@ To build Docker images from Dockerfiles, we use the `docker build` command. The 
     Running the following builds and tags the image:
 
     ```
-    $ docker build -t 'delner/ping' .
+    $ docker build -t 'steven/ping' .
     Sending build context to Docker daemon    190kB
     Step 1/4 : FROM ubuntu:16.04
      ---> 6a2f32de169d
-    Step 2/4 : LABEL author "David Elner"
+    Step 2/4 : LABEL author "Steven Com My"
      ---> Running in 50f765b29144
      ---> 27bfa513216f
     Removing intermediate container 50f765b29144
@@ -140,11 +140,11 @@ To build Docker images from Dockerfiles, we use the `docker build` command. The 
     We can see this caching behavior in action if we simply rerun the same command again:
 
     ```
-    $ docker build -t 'delner/ping' .
+    $ docker build -t 'steven/ping' .
     Sending build context to Docker daemon    191kB
     Step 1/4 : FROM ubuntu:16.04
      ---> 6a2f32de169d
-    Step 2/4 : LABEL author "David Elner"
+    Step 2/4 : LABEL author "Steven Com My"
      ---> Using cache
      ---> 27bfa513216f
     Step 3/4 : RUN apt-get update
@@ -162,7 +162,7 @@ To build Docker images from Dockerfiles, we use the `docker build` command. The 
     ```
     $ docker images
     REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-    delner/ping         latest              918648f00b92        9 minutes ago       159MB
+    steven/ping         latest              918648f00b92        9 minutes ago       159MB
     ubuntu              16.04               6a2f32de169d        4 days ago          117MB
     ```
 
@@ -187,7 +187,7 @@ Then running `build` again yields...
 ```
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-delner/ping         latest              912bc1c7c059        4 seconds ago       159MB
+steven/ping         latest              912bc1c7c059        4 seconds ago       159MB
 ubuntu              16.04               6a2f32de169d        4 days ago          117MB
 $
 ```
@@ -202,7 +202,7 @@ The rewritten Dockerfile should like:
 
 ```
 FROM ubuntu:16.04
-LABEL author="David Elner"
+LABEL author="Steven Com My"
 
 RUN apt-get update \
     && apt-get install -y iputils-ping \
@@ -216,7 +216,7 @@ Then after rerunning `build`, our images now like:
 ```
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-delner/ping         latest              622e555950e0        12 seconds ago      121MB
+steven/ping         latest              622e555950e0        12 seconds ago      121MB
 ubuntu              16.04               6a2f32de169d        4 days ago          117MB
 $
 ```
@@ -240,7 +240,7 @@ Since our Dockerfile is build for `ping`, let's add the `ENV` and `CMD` directiv
 
 ```
 FROM ubuntu:16.04
-LABEL author="David Elner"
+LABEL author="Steven Com My"
 
 ENV PING_TARGET "google.com"
 
@@ -253,10 +253,10 @@ RUN apt-get update \
 CMD ["sh", "-c", "ping $PING_TARGET"]
 ```
 
-These new directives mean that our image when run with `docker run -it delner/ping` will automatically run `ping google.com`.
+These new directives mean that our image when run with `docker run -it steven/ping` will automatically run `ping google.com`.
 
 ```
-$ docker run -it delner/ping
+$ docker run -it steven/ping
 PING google.com (172.217.10.46) 56(84) bytes of data.
 64 bytes from lga34s13-in-f14.1e100.net (172.217.10.46): icmp_seq=1 ttl=37 time=0.300 ms
 64 bytes from lga34s13-in-f14.1e100.net (172.217.10.46): icmp_seq=2 ttl=37 time=0.373 ms
