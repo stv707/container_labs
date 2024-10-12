@@ -158,10 +158,13 @@ The `-v` flag to accomplish this is almost identical to the previous one. Simply
 
 ```
 $ pwd
-/home/david/src/docker-training/exercises/basic/5-volumes/
-$ docker run --rm -d --name apache -p 80:80 -v /home/david/src/docker-training/exercises/basic/5-volumes/:/usr/local/apache2/htdocs/ httpd:2.4
+H:\docker-maybank\docker-training\exercises\day1\5-volumes
+
+$ docker run --rm -d --name apache2 -p 81:80 -v H:\docker-maybank\docker-training\exercises\day1\5-volumes:/usr/local/apache2/htdocs/ httpd:2.4
+
 0d91516b20ea6113b5dcca08ada6465095dc68663b3d2201dc0490165764f842
-$ curl localhost
+
+$ curl http://localhost:81
 <html><body><h1>It works in Docker!</h1></body></html>
 $
 ```
