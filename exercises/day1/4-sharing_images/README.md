@@ -48,10 +48,10 @@ $ docker images
 REPOSITORY                                                TAG                 IMAGE ID            CREATED             SIZE
 ping                                                      latest              a980ae1c79ea        2 minutes ago       121MB
 ubuntu                                                    16.04               6a2f32de169d        5 days ago          117MB
-$ docker tag ping steven/ping:1.0
+$ docker tag ping steven/ping:v1
 $ docker images
 REPOSITORY                                                TAG                 IMAGE ID            CREATED             SIZE
-steven/ping                                               1.0                 a980ae1c79ea        5 minutes ago       121MB
+steven/ping                                               v1                  a980ae1c79ea        5 minutes ago       121MB
 ping                                                      latest              a980ae1c79ea        5 minutes ago       121MB
 ubuntu                                                    16.04               6a2f32de169d        5 days ago          117MB
 $ 
@@ -64,7 +64,7 @@ $ docker rmi ping
 Untagged: ping:latest
 $ docker images
 REPOSITORY                                                TAG                 IMAGE ID            CREATED             SIZE
-steven/ping                                               1.0                 a980ae1c79ea        6 minutes ago       121MB
+steven/ping                                               v1                  a980ae1c79ea        6 minutes ago       121MB
 ubuntu                                                    16.04               6a2f32de169d        5 days ago          117MB
 $ 
 ```
