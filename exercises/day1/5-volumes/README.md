@@ -22,6 +22,7 @@ $ curl localhost
 <html><body><h1>It works!</h1></body></html>
 $
 ```
+>> You can also use web browser to check http://localhost
 
 This is the default `index.html` file included with a new Apache 2.4 installation. Let's replace this HTML file with new content.
 
