@@ -1,16 +1,14 @@
 # Containers, Docker, and DevOps Integration with Jenkins Training
+### This repo is for Maybank Delivery of Container
 
 An introduction to the basics of using Docker. 
 
-### Before you get started...
+### Before you get started...you need to have:>
 
-1. [Install Docker on your machine.](https://docs.docker.com/engine/installation/)
+1. Docker Desktop up and running 
+2. git for Windows
+3. VS Code for editing files/build
 
-2. [Clone this repo locally.](https://github.com/delner/docker-training)
-
-### After you're setup...
-
-Follow the [presentation](https://1drv.ms/p/s!AoPSUV0rpt0Ajz1yfx_QLRBjmeqi), and open up each exercise when prompted.
 
 ### Basic Exercises
 
