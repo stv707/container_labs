@@ -213,7 +213,7 @@ The Docker way is to create a new image. There are two ways to do this: 1) build
     Pass the container ID, an author, commit message, and give it the name `<DockerHub username>/ping`:
 
     ```
-    $ docker commit -a 'Steven Com My' -m 'Added ping utility.' 786 steven/ping
+    $ docker commit -a 'Steven Com My' -m 'Added ping utility.' <Container ID> steven/ping
     sha256:78ba830008a61a09f9eae8ca4ead0966ff501457c23df0f635e0651253b3d0e3
     $ 
     ```
