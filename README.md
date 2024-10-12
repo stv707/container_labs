@@ -1,7 +1,5 @@
 # Containers, Docker, and DevOps Integration with Jenkins Training
-### This repo is for Maybank Delivery of Container
-
-An introduction to the basics of using Docker. 
+### This repo is for Maybank Training Delivery of Container
 
 ### Before you get started...you need to have:>
 
@@ -10,7 +8,7 @@ An introduction to the basics of using Docker.
 3. VS Code for editing files/build
 
 
-### Basic Exercises
+### Exercises Day 1
 
 1. [Running and managing Docker containers and images](https://github.com/delner/docker-training/blob/master/exercises/basic/1-running_containers/README.md)
 2. [Changing images](https://github.com/delner/docker-training/blob/master/exercises/basic/2-changing_images/README.md)
@@ -19,10 +17,8 @@ An introduction to the basics of using Docker.
 5. [Volumes](https://github.com/delner/docker-training/blob/master/exercises/basic/5-volumes/README.md)
 6. [Networking](https://github.com/delner/docker-training/blob/master/exercises/basic/6-networking/README.md)
 
-### Docker Compose
+### Exercises Day 2
+1. GOGO 
+2. GOGO
 
-1. Basics
-
-### Dockerization Exercises
-
-1. Rails + Database application
+### Exercises Day 3 
