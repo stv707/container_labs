@@ -7,6 +7,8 @@
 1. Docker Desktop up and running 
 2. git for Windows
 3. VS Code for editing files/build
+4. Configure WSL2 for Docker Desktop
+>> As part of setup, Steven will go through all this with you step by step before starting any exercise! 
 
 
 ### Exercises Day 1

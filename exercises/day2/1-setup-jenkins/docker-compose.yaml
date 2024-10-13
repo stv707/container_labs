@@ -1,6 +1,6 @@
 services:
   jenkins-blueocean:
-    image: myjenkins-blueocean:v2
+    image: myjenkins-blueocean:v3
     container_name: jenkins-blueocean
     restart: on-failure
     environment:
