@@ -28,7 +28,7 @@ docker network create jenkins
 
 once the image is listed, we will bring up the container using docker-compose
 ```sh 
-docker-compose up -d . 
+docker-compose up -d
 ```
 
 Verify the container is running 
@@ -36,6 +36,12 @@ Verify the container is running
 docker-compose ps 
 ```
 
+Capture the admin password from the docker-compose logs
+```sh 
+docker-compose logs
+```
+The password would look like this: 
+![alt text](image.png)
 
 
 
@@ -44,4 +50,17 @@ docker-compose ps
 
 
 
-# END OF EXERCISE 6
+
+
+
+
+
+
+
+
+
+
+
+
+
+# END OF EXERCISE 1 - Jenkins UP
