@@ -21,7 +21,14 @@
 6. [Networking](https://github.com/stv707/container_labs/blob/main/exercises/day1/6-networking/README.md)
 
 ### Exercises Day 2
-1. GOGO 
-2. GOGO
+1. TODO
+2. TODO
+3. TODO
+4. TODO
+5. TODO
+6. TODO
 
 ### Exercises Day 3 
+1. TODO
+2. TODO
+3. TODO
