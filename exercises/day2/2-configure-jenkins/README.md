@@ -21,5 +21,6 @@ Once you have logged into Jenkins with your username, you need to set the Docker
 4. In the new Cloud Windows, select Docker Cloud Details, and select Enabled and Save it
 ![alt text](image-3.png)
 
-5. 
+# END OF EXERCISE 2
+>> Proceed to Exercise 3 
 
