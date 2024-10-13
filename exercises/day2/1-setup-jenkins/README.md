@@ -21,6 +21,11 @@ after the build is completed, verify you have the container images
 docker images 
 ```
 
+Create jenkins network for the docker-compose
+```sh
+docker network create jenkins 
+```
+
 once the image is listed, we will bring up the container using docker-compose
 ```sh 
 docker-compose up -d . 
