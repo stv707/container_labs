@@ -16,4 +16,7 @@ RUN groupadd -f docker && usermod -aG docker jenkins
 USER jenkins
 
 # Install Jenkins plugins
-RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
+RUN jenkins-plugin-cli --plugins \ 
+"docker-plugin:1.6.2" \ 
+"docker-java-api:3.4.0-94.v65ced49b_a_7d5" \
+"blueocean:1.27.16"
