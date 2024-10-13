@@ -43,6 +43,29 @@ docker-compose logs
 The password would look like this: 
 ![alt text](image.png)
 
+### Setup Jenkins: 
+1. Open a Web Browser ( Chrome ) to http://localhost:8080 
+![alt text](image-1.png)
+
+2. in the Administrator password, enter the password you captured earlier
+
+3. In the following screen, select Install Suggested plugins: 
+![alt text](image-2.png)
+
+4. Wait until jenkins installed and configured
+![alt text](image-3.png)
+
+5. In the following screen, create your user account and save and continue ( Remember your user account and password )
+![alt text](image-4.png)
+
+6. In the instance configuration, leave the default, hit Save and Finish
+![alt text](image-5.png)
+
+7. Hit Start using Jenkins
+
+
+
+
 
 
 
