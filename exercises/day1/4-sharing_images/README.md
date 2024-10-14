@@ -7,6 +7,7 @@ We'll need our `ping` image from the "Building Images" exercise, so be sure to c
 ### Getting Started
 
 To share images on DockerHub, you'll need a DockerHub account. You can sign up [here](https://hub.docker.com/).
+>> The Sign Up Process is FREE, if you opt to NOT sign up, you can proceed to next exercise
 
 Most of the features on DockerHub should be pretty similar to GitHub: there's a search function for finding new images, repositories for your images, and organizations.
 
