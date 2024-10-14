@@ -2,14 +2,14 @@
 
 In this exercise, we'll learn how to modify an existing Docker image, and commit it as a new one.
 
-To accomplish this, we'll modify the `ubuntu:16.04` image to include the `ping` utility.
+To accomplish this, we'll modify the `ubuntu:latest` image to include the `ping` utility.
 
 ### Getting setup
 
-First download the `ubuntu:16.04` image with `docker pull`. (You might already have this if you have completed the previous tutorial.)
+First download the `ubuntu:latest` image with `docker pull`. (You might already have this if you have completed the previous tutorial.)
 
 ```
-$ docker pull ubuntu:16.04
+$ docker pull ubuntu:latest
 16.04: Pulling from library/ubuntu
 c62795f78da9: Pull complete 
 d4fceeeb758e: Pull complete 
@@ -17,7 +17,7 @@ d4fceeeb758e: Pull complete
 0062f774e994: Pull complete 
 6b33fd031fac: Pull complete 
 Digest: sha256:c2bbf50d276508d73dd865cda7b4ee9b5243f2648647d21e3a471dd3cc4209a0
-Status: Downloaded newer image for ubuntu:16.04
+Status: Downloaded newer image for ubuntu:latest
 $
 ```
 
@@ -28,7 +28,7 @@ Let's run the image in a new container and install the `ping` utility.
 1. First start the container with `/bin/bash`:
 
     ```
-    $ docker run -it ubuntu:16.04 /bin/bash
+    $ docker run -it ubuntu:latest /bin/bash
     root@786b94c53c6d:/#
     ```
 
@@ -186,7 +186,7 @@ The Docker way is to create a new image. There are two ways to do this: 1) build
     ```
     $ docker ps -a
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
-    786b94c53c6d        ubuntu:16.04        "/bin/bash"         13 minutes ago      Exited (0) 22 seconds ago                       angry_pike
+    786b94c53c6d        ubuntu:latest        "/bin/bash"         13 minutes ago      Exited (0) 22 seconds ago                       angry_pike
     $
     ```
 
