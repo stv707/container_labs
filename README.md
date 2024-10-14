@@ -27,7 +27,6 @@
 3. TODO
 4. TODO
 5. TODO
-6. TODO
 
 ### Exercises Day 3 
 1. TODO
