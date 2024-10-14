@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 LABEL author="Steven Com My"
 
-ENV PING_TARGET "google.com"
+ENV PING_TARGET="google.com"
 
 RUN apt-get update \
     && apt-get install -y iputils-ping \

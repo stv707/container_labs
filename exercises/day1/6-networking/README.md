@@ -109,6 +109,7 @@ Inspecting the logs for `pinger` we can see it was able to successfully ping the
 Running `ping` with the `dummy` as the target:
 
 ```
+$ docker rm -f pinger 
 $ docker run --rm -d -e PING_TARGET=dummy --name pinger steven/ping:v1
 3a79f28b8ac36c0e7aae523c4831c9405c110d593c15a30639606250595b245b
 $ docker ps
