@@ -9,8 +9,8 @@ To accomplish this, we'll setup an Apache HTTPD web server, and persist some HTM
 To run our Apache HTTPD server, run this command:
 
 ```
-$ docker run --rm -d --name apache -p 80:80 httpd:2.4
-d87e0a193dde5652ac762d8849983c2cadb5116b80c8a61a4180e350d678b4d2
+docker run --rm -d --name apache -p 80:80 httpd:2.4
+
 ```
 
 This command will start a new container from HTTP 2.4, name it `apache`, bind port `80` to the host machine (more on this later), and set a flag to delete the container when it stops.
@@ -18,9 +18,9 @@ This command will start a new container from HTTP 2.4, name it `apache`, bind po
 After it starts, we can run `curl localhost` to query the web server for the default page:
 
 ```
-$ curl localhost
+curl localhost
 <html><body><h1>It works!</h1></body></html>
-$
+
 ```
 >> You can also use web browser to check http://localhost
 
@@ -29,8 +29,8 @@ This is the default `index.html` file included with a new Apache 2.4 installatio
 To do so, we'll use the `docker cp` command, similar to `scp`, which copies files between the host and containers. Let's give it the `index.html` file from the directory this README is sitting in:
 
 ```
-$ docker cp index.html apache:/usr/local/apache2/htdocs/
-$
+docker cp index.html apache:/usr/local/apache2/htdocs/
+
 ```
 
 The first path is the source path, representing our new file on our host machine, and the second path our destination. `apache` is the name of the container we want to copy into, and `/usr/local/apache2/htdocs/` is where the web server serves HTML from.
@@ -38,9 +38,9 @@ The first path is the source path, representing our new file on our host machine
 Running `curl` again now looks a little different:
 
 ```
-$ curl localhost
+curl localhost
 <html><body><h1>It works in Docker!</h1></body></html>
-$
+
 ```
 
 ##### A possible data problem
@@ -52,13 +52,14 @@ However, containers in Docker are, in practice, considered ephemeral. They can d
 In the case of our HTTPD server, simply stopping the container will cause it to be autoremoved. We can bring another container back up in it's place, but it won't have our changes any more.
 
 ```
-$ docker stop apache
-apache
-$ docker run --rm -d --name apache -p 80:80 httpd:2.4
-9bd0620e3d8464456c368b1fe9b82733282d980a7c3f854b8cba7726f0a02958
-$ curl localhost
+docker stop apache
+
+docker run --rm -d --name apache -p 80:80 httpd:2.4
+
+curl localhost
 <html><body><h1>It works!</h1></body></html>
-$
+
+
 ```
 
 To preserve our data between outages or system upgrades, we can use volumes to persist our data across generations of containers.
@@ -70,29 +71,29 @@ Volumes in Docker are file stores, which sit independently of your Docker contai
 To list your volumes, run `docker volume ls`:
 
 ```
-$ docker volume ls
+docker volume ls
 DRIVER              VOLUME NAME
-$
+
 ```
 To create a new volume, run `docker volume create` and give it a volume name.
 
 ```
-$ docker volume create myvolume
+docker volume create myvolume
 myvolume
-$ docker volume ls
+docker volume ls
 DRIVER              VOLUME NAME
 local               myvolume
-$
+
 ```
 
 To remove a volume, run `docker volume rm` and give it the volume name.
 
 ```
-$ docker volume rm myvolume
+docker volume rm myvolume
 myvolume
-$ docker volume ls
+docker volume ls
 DRIVER              VOLUME NAME
-$
+
 ```
 
 ### Mounting volumes on containers
@@ -100,50 +101,50 @@ $
 First create a new volume named `httpd_htdocs`:
 
 ```
-$ docker volume create httpd_htdocs
+docker volume create httpd_htdocs
 httpd_htdocs
-$
+
 ```
 
 Then re-run our `docker run` command, providing the `-v` mount flag.
 
 ```
-$ docker run --rm -d --name apache -p 80:80 -v httpd_htdocs:/usr/local/apache2/htdocs/ httpd:2.4
-c21dd93fea83d710b4d4c954911862760030723df6a5b42650e462e388fe6049
-$
+docker run --rm -d --name apache -p 80:80 -v httpd_htdocs:/usr/local/apache2/htdocs/ httpd:2.4
+
+
 ```
 
 And re-copy in our modified HTML file.
 
 ```
-$ docker cp index.html apache:/usr/local/apache2/htdocs/
-$
+ docker cp index.html apache:/usr/local/apache2/htdocs/
+
 ```
 
 And run `curl` to verify it worked.
 
 ```
-$ curl localhost
+curl localhost
 <html><body><h1>It works in Docker!</h1></body></html>
-$
+
 ```
 
 Now to see the volume in action, let's stop the container. By providing the `--rm` flag during `run`, it should remove the container upon stopping.
 
 ```
-$ docker stop apache
+docker stop apache
 apache
-$
+
 ```
 
 Then once again start httpd with the same run command as last time. This time, however, we can `curl` and see our file changes are still there from before.
 
 ```
-$ docker run --rm -d --name apache -p 80:80 -v httpd_htdocs:/usr/local/apache2/htdocs/ httpd:2.4
-c21dd93fea83d710b4d4c954911862760030723df6a5b42650e462e388fe6049
-$ curl localhost
+docker run --rm -d --name apache -p 80:80 -v httpd_htdocs:/usr/local/apache2/htdocs/ httpd:2.4
+
+curl localhost
 <html><body><h1>It works in Docker!</h1></body></html>
-$
+
 ```
 
 We can take this volume and mount it on any HTTPD container now, which gives us flexibility in swapping out our container for newer versions without losing our data, if we wish.
@@ -157,12 +158,12 @@ As an alternative to using volumes, if you have a directory on your host machine
 The `-v` flag to accomplish this is almost identical to the previous one. Simply specify an absolute path to a local directory instead. In our case, we'll pass `.` to specify the `5-volumes` directory in this repo, which conveniently contains a modified version of the HTML file.
 
 ```
-$ pwd
+pwd
 H:\docker-maybank\docker-training\exercises\day1\5-volumes
 
-$ docker run --rm -d --name apache2 -p 81:80 -v H:\docker-maybank\docker-training\exercises\day1\5-volumes:/usr/local/apache2/htdocs/ httpd:2.4
+docker run --rm -d --name apache2 -p 81:80 -v H:\docker-maybank\docker-training\exercises\day1\5-volumes:/usr/local/apache2/htdocs/ httpd:2.4
 
-0d91516b20ea6113b5dcca08ada6465095dc68663b3d2201dc0490165764f842
+
 
 $ curl http://localhost:81
 <html><body><h1>It works in Docker!</h1></body></html>
