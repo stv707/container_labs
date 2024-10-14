@@ -1,4 +1,4 @@
-### Exercise Objective:
+# Exercise 7: Docker Compose
 Deploy a fully functional WordPress site using Docker Compose with a MySQL database, demonstrating container orchestration and persistent data handling.
 
 ### Prerequisites:
