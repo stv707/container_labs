@@ -2,14 +2,14 @@
 
 In this exercise, we'll learn how to create a new Docker image.
 
-To do this, like in "Changing Images", we'll add the `ping` utility to the `ubuntu:16.04` image. The outcome from each of these exercises should be equivalent.
+To do this, like in "Changing Images", we'll add the `ping` utility to the `ubuntu:latest` image. The outcome from each of these exercises should be equivalent.
 
 ### Getting setup
 
-First download the `ubuntu:16.04` image with `docker pull`. (You might already have this if you have completed the previous tutorial.)
+First download the `ubuntu:latest` image with `docker pull`. (You might already have this if you have completed the previous tutorial.)
 
 ```
-$ docker pull ubuntu:16.04
+$ docker pull ubuntu:latest
 16.04: Pulling from library/ubuntu
 c62795f78da9: Pull complete 
 d4fceeeb758e: Pull complete 
@@ -18,7 +18,7 @@ d4fceeeb758e: Pull complete
 
 6b33fd031fac: Pull complete 
 Digest: sha256:c2bbf50d276508d73dd865cda7b4ee9b5243f2648647d21e3a471dd3cc4209a0
-Status: Downloaded newer image for ubuntu:16.04
+Status: Downloaded newer image for ubuntu:latest
 $
 ```
 
@@ -62,7 +62,7 @@ Instead, we'll use `Dockerfile`. The `Dockerfile` is a "recipe" of sorts, that c
     Add the following two lines to the top of your file:
 
     ```
-    FROM ubuntu:16.04
+    FROM ubuntu:latest
     LABEL author="Steven Com My"
     ```
 
@@ -87,7 +87,7 @@ Instead, we'll use `Dockerfile`. The `Dockerfile` is a "recipe" of sorts, that c
     Our file should now look something like this:
 
     ```
-    FROM ubuntu:16.04
+    FROM ubuntu:latest
     LABEL author="Steven Com My"
 
     RUN apt-get update
@@ -108,7 +108,7 @@ To build Docker images from Dockerfiles, we use the `docker build` command. The 
     ```
     $ docker build -t 'steve/ping:v1' .
     Sending build context to Docker daemon    190kB
-    Step 1/4 : FROM ubuntu:16.04
+    Step 1/4 : FROM ubuntu:latest
      ---> 6a2f32de169d
     Step 2/4 : LABEL author "Steven Com My"
      ---> Running in 50f765b29144
@@ -143,7 +143,7 @@ To build Docker images from Dockerfiles, we use the `docker build` command. The 
     ```
     $ docker build -t 'steve/ping:v1' .
     Sending build context to Docker daemon    191kB
-    Step 1/4 : FROM ubuntu:16.04
+    Step 1/4 : FROM ubuntu:latest
      ---> 6a2f32de169d
     Step 2/4 : LABEL author "Steven Com My"
      ---> Using cache
@@ -202,7 +202,7 @@ Our fluff actually happens to originate from the `apt-get update` command, which
 The rewritten Dockerfile should like:
 
 ```
-FROM ubuntu:16.04
+FROM ubuntu:latest
 LABEL author="Steven Com My"
 
 RUN apt-get update \
@@ -240,7 +240,7 @@ Some important ones:
 Since our Dockerfile is build for `ping`, let's add the `ENV` and `CMD` directives.
 
 ```
-FROM ubuntu:16.04
+FROM ubuntu:latest
 LABEL author="Steven Com My"
 
 ENV PING_TARGET "google.com"
