@@ -17,8 +17,6 @@ Deploy a fully functional WordPress site using Docker Compose with a MySQL datab
 2. **Define the `docker-compose.yml` File**  
    Inside the `wordpress-compose` folder, create a `docker-compose.yml` file with the following content:
    ```yaml
-   version: '3.1'
-
    services:
      db:
        image: mysql:5.7
@@ -26,10 +24,10 @@ Deploy a fully functional WordPress site using Docker Compose with a MySQL datab
          - db_data:/var/lib/mysql
        restart: always
        environment:
-         MYSQL_ROOT_PASSWORD: example
+         MYSQL_ROOT_PASSWORD: change_me
          MYSQL_DATABASE: wordpress
          MYSQL_USER: user
-         MYSQL_PASSWORD: userpass
+         MYSQL_PASSWORD: change_me
 
      wordpress:
        depends_on:
@@ -43,7 +41,7 @@ Deploy a fully functional WordPress site using Docker Compose with a MySQL datab
        environment:
          WORDPRESS_DB_HOST: db:3306
          WORDPRESS_DB_USER: user
-         WORDPRESS_DB_PASSWORD: userpass
+         WORDPRESS_DB_PASSWORD: change_me
          WORDPRESS_DB_NAME: wordpress
 
    volumes:
@@ -86,8 +84,6 @@ For **Part 2**, we'll modify the existing `docker-compose.yml` file to add **php
    Here's the updated `docker-compose.yml`:
 
    ```yaml
-   version: '3.1'
-
    services:
      db:
        image: mysql:5.7
@@ -95,10 +91,10 @@ For **Part 2**, we'll modify the existing `docker-compose.yml` file to add **php
          - db_data:/var/lib/mysql
        restart: always
        environment:
-         MYSQL_ROOT_PASSWORD: example
+         MYSQL_ROOT_PASSWORD: change_me
          MYSQL_DATABASE: wordpress
          MYSQL_USER: user
-         MYSQL_PASSWORD: userpass
+         MYSQL_PASSWORD: change_me
 
      wordpress:
        depends_on:
@@ -112,7 +108,7 @@ For **Part 2**, we'll modify the existing `docker-compose.yml` file to add **php
        environment:
          WORDPRESS_DB_HOST: db:3306
          WORDPRESS_DB_USER: user
-         WORDPRESS_DB_PASSWORD: userpass
+         WORDPRESS_DB_PASSWORD: change_me
          WORDPRESS_DB_NAME: wordpress
 
      phpmyadmin:
@@ -121,10 +117,10 @@ For **Part 2**, we'll modify the existing `docker-compose.yml` file to add **php
        image: phpmyadmin/phpmyadmin:latest
        restart: always
        ports:
-         - "8080:80"
+         - "8081:80"
        environment:
          PMA_HOST: db
-         MYSQL_ROOT_PASSWORD: example
+         MYSQL_ROOT_PASSWORD: change_me
 
    volumes:
      db_data: {}
@@ -147,7 +143,7 @@ For **Part 2**, we'll modify the existing `docker-compose.yml` file to add **php
 3. **Access phpMyAdmin**  
    Once the services are running, you can access phpMyAdmin in your browser at:
    ```
-   http://localhost:8080
+   http://localhost:8081
    ```
 
    - Login with the MySQL credentials:
