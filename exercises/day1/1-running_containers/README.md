@@ -20,13 +20,13 @@ To run containers, we'll first need to pull some images.
     ```
     # Official Docker images
     <repo>:<tag>
-    # ubuntu:16.04
+    # ubuntu
     # elasticsearch:5.2
     # nginx:latest
 
     # User or organization made images
     <user or org>/<repo>:<tag>
-    # delner/ubuntu:16.04
+    # delner/ubuntu
     # bitnami/rails:latest
     ```
 
@@ -44,10 +44,10 @@ To run containers, we'll first need to pull some images.
 
     You can also find images online at [DockerHub](https://hub.docker.com/).
 
-    Run `docker pull ubuntu:16.04` to pull an image of Ubuntu 16.04 from DockerHub.
+    Run `docker pull ubuntu` to pull an image of Ubuntu 16.04 from DockerHub.
 
     ```
-    $ docker pull ubuntu:16:04
+    $ docker pull ubuntu
     16.04: Pulling from library/ubuntu
     8aec416115fd: Pull complete 
     695f074e24e3: Pull complete 
@@ -55,11 +55,11 @@ To run containers, we'll first need to pull some images.
     bc7277e579f0: Pull complete 
     2508cbcde94b: Pull complete 
     Digest: sha256:71cd81252a3563a03ad8daee81047b62ab5d892ebbfbf71cf53415f29c130950
-    Status: Downloaded newer image for ubuntu:16.04
+    Status: Downloaded newer image for ubuntu
     ```
 3. We can also pull different versions on the same image.
 
-    Run `docker pull ubuntu:16.10` to pull an image of Ubuntu 16.10.
+    Run `docker pull ubuntu` to pull an image of Ubuntu
 
     ```
     16.10: Pulling from library/ubuntu
@@ -86,7 +86,7 @@ To run containers, we'll first need to pull some images.
 
     ```
     $ docker rmi 31005225a745
-    Untagged: ubuntu:16.10
+    Untagged: ubuntu
     Untagged: ubuntu@sha256:609c1726180221d95a66ce3ed1e898f4a543c5be9ff3dbb1f10180a6cb2a6fdc
     Deleted: sha256:31005225a74578ec48fbe5a833ef39a3e41ebcbf0714ad3867070405b3efd81e
     Deleted: sha256:c9fcffc56240d2382f78da3130215afcfc7130b29210184f30ffce3a3eae677d
@@ -99,7 +99,7 @@ To run containers, we'll first need to pull some images.
     Alternatively, you can delete images by tag or by a partial image ID. In the previous example, the following would have been equivalent:
 
      - `docker rmi 31`
-     - `docker rmi ubuntu:16.10`
+     - `docker rmi ubuntu`
 
     Running `docker images` should reflect the deleted image.
 
@@ -117,10 +117,10 @@ Using the Ubuntu 16.04 image we downloaded, we can run a our first container. Un
 
 The command can be anything you want, as long as it exists on the image. In the case of the Ubuntu image, it's a Linux kernel with many of the typical applications you'd find in a basic Linux environment.
 
-1. Let's do a very simple example. Run `docker run ubuntu:16.04 /bin/echo 'Hello world!'`
+1. Let's do a very simple example. Run `docker run ubuntu /bin/echo 'Hello world!'`
 
     ```
-    $ docker run ubuntu:16.04 /bin/echo 'Hello world!'
+    $ docker run ubuntu /bin/echo 'Hello world!'
     Hello world!
     ```
 
@@ -140,17 +140,17 @@ The command can be anything you want, as long as it exists on the image. In the 
     ```
     $ docker ps -a
     CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS                          PORTS               NAMES
-    4fc37e27944a        ubuntu:16.04        "/bin/echo 'Hello ..."   About a minute ago   Exited (0) About a minute ago                       zen_swartz
+    4fc37e27944a        ubuntu        "/bin/echo 'Hello ..."   About a minute ago   Exited (0) About a minute ago                       zen_swartz
     ```
 
     Okay, there's our container. But why is the status "Exited"?
 
     *Docker containers only run as long as the command it starts with is running.* In our example, it ran `/bin/echo` successfully, printed some output, then exited with status code 0 (which means no errors.) When Docker saw this command exit, the container stopped.
 
-3. Let's do something a bit more interactive. Run `docker run ubuntu:16.04 /bin/bash`
+3. Let's do something a bit more interactive. Run `docker run ubuntu /bin/bash`
 
     ```
-    $ docker run ubuntu:16.04 /bin/bash
+    $ docker run ubuntu /bin/bash
     $
     ```
 
@@ -159,7 +159,7 @@ The command can be anything you want, as long as it exists on the image. In the 
     ```
     $ docker ps -a
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
-    654792eb403b        ubuntu:16.04        "/bin/bash"         4 seconds ago       Exited (0) 2 seconds ago                       distracted_minsky
+    654792eb403b        ubuntu        "/bin/bash"         4 seconds ago       Exited (0) 2 seconds ago                       distracted_minsky
     ```
 
     The container exited instantly. Why? We were running the `/bin/bash` command, which is an interactive program. However, the `docker run` command doesn't run interactively by default, therefore the `/bin/bash` command exited, and the container stopped.
@@ -167,7 +167,7 @@ The command can be anything you want, as long as it exists on the image. In the 
     Instead, let's add the `-it` flags, which tells Docker to run the command interactively with your terminal.
 
     ```
-    $ docker run -it ubuntu:16.04 /bin/bash
+    $ docker run -it ubuntu /bin/bash
     root@5fa68739793c:/# 
     ```
 
@@ -196,7 +196,7 @@ The command can be anything you want, as long as it exists on the image. In the 
     Let's run `/bin/sleep 3600`, which will run the container idly for 1 hour:
 
     ```
-    $ docker run -d ubuntu:16.04 /bin/sleep 3600
+    $ docker run -d ubuntu /bin/sleep 3600
     be730b8c554b69383f30f71222b9ac264367c7454790dc2a4eb0cda33c0baa2a
     $
     ```
@@ -206,7 +206,7 @@ The command can be anything you want, as long as it exists on the image. In the 
     ```
     $ docker ps
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-    be730b8c554b        ubuntu:16.04        "/bin/sleep 3600"    41 seconds ago      Up 40 seconds                           jovial_goldstine
+    be730b8c554b        ubuntu        "/bin/sleep 3600"    41 seconds ago      Up 40 seconds                           jovial_goldstine
     $
     ```
 
@@ -245,7 +245,7 @@ The command can be anything you want, as long as it exists on the image. In the 
     exit
     $ docker ps
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-    be730b8c554b        ubuntu:16.04        "/bin/sleep 3600"   9 minutes ago       Up 9 minutes                            jovial_goldstine
+    be730b8c554b        ubuntu        "/bin/sleep 3600"   9 minutes ago       Up 9 minutes                            jovial_goldstine
     $
     ```
 
@@ -267,7 +267,7 @@ The command can be anything you want, as long as it exists on the image. In the 
     ```
     $ docker ps -a
     CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
-    be730b8c554b        ubuntu:16.04        "/bin/sleep 600"         1 minute ago        Exited (137) 1 minute ago                       jovial_goldstine
+    be730b8c554b        ubuntu        "/bin/sleep 600"         1 minute ago        Exited (137) 1 minute ago                       jovial_goldstine
     $
     ```
 
@@ -280,7 +280,7 @@ The command can be anything you want, as long as it exists on the image. In the 
     ```
     $ docker ps -a
     CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
-    be730b8c554b        ubuntu:16.04        "/bin/sleep 600"         1 minute ago        Exited (137) 1 minute ago                       jovial_goldstine
+    be730b8c554b        ubuntu        "/bin/sleep 600"         1 minute ago        Exited (137) 1 minute ago                       jovial_goldstine
     $
     ```
 
@@ -298,7 +298,7 @@ The command can be anything you want, as long as it exists on the image. In the 
     It can be tedious to remove old containers each time after you run them. To address this, Docker also allows you to specify the `--rm` flag to the `docker run` command, which will remove the container after it exits.
 
     ```
-    $ docker run --rm ubuntu:16.04 /bin/echo 'Hello and goodbye!'
+    $ docker run --rm ubuntu /bin/echo 'Hello and goodbye!'
     Hello and goodbye!
     $ docker ps -a
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
