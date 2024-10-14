@@ -1,5 +1,3 @@
-version: '3.1'
-
 services:
   db:
     image: mysql:5.7
@@ -41,3 +39,7 @@ services:
 volumes:
   db_data: {}
   wordpress_data: {}
+
+
+
+
