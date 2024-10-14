@@ -69,7 +69,7 @@ There's some miscellaneous information about the network, but notice the `"Conta
 Let's start a `ping` container, and inspect this again:
 
 ```
-$ docker run --rm -d --name dummy delner/ping:1.0
+$ docker run --rm -d --name dummy steven/ping:v1
 104633917dbfe00843722336838f163b800dde46e632e47470b204c21fc44f21
 $ docker network inspect bridge
 ...
@@ -89,12 +89,12 @@ $
 You can see the container was added to the default network. Now let's add another `ping` container, and set it to ping our first.
 
 ```
-$ docker run --rm -d -e PING_TARGET=172.17.0.2 --name pinger delner/ping:1.0
+$ docker run --rm -d -e PING_TARGET=172.17.0.2 --name pinger steven/ping:v1
 3a79f28b8ac36c0e7aae523c4831c9405c110d593c15a30639606250595b245b
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS               NAMES
-3a79f28b8ac3        delner/ping:1.0     "sh -c 'ping $PING..."   4 seconds ago        Up 3 seconds                            pinger
-104633917dbf        delner/ping:1.0     "sh -c 'ping $PING..."   About a minute ago   Up About a minute                       dummy
+3a79f28b8ac3        steven/ping:v1     "sh -c 'ping $PING..."   4 seconds ago        Up 3 seconds                            pinger
+104633917dbf        steven/ping:v1     "sh -c 'ping $PING..."   About a minute ago   Up About a minute                       dummy
 $ docker logs pinger
 PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
 64 bytes from 172.17.0.2: icmp_seq=1 ttl=64 time=0.171 ms
@@ -109,11 +109,11 @@ Inspecting the logs for `pinger` we can see it was able to successfully ping the
 Running `ping` with the `dummy` as the target:
 
 ```
-$ docker run --rm -d -e PING_TARGET=dummy --name pinger delner/ping:1.0
+$ docker run --rm -d -e PING_TARGET=dummy --name pinger steven/ping:v1
 3a79f28b8ac36c0e7aae523c4831c9405c110d593c15a30639606250595b245b
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS               NAMES
-104633917dbf        delner/ping:1.0     "sh -c 'ping $PING..."   About a minute ago   Up About a minute                       dummy
+104633917dbf        steven/ping:v1     "sh -c 'ping $PING..."   About a minute ago   Up About a minute                       dummy
 $
 ```
 
@@ -130,7 +130,9 @@ To create a new network, use the `docker network create` command and provide it 
 ```
 $ docker network create skynet
 c234438e88ab579be943859dbc0a89788563226c3a9a13b4f1a2c78d1d8000c9
+
 $ docker network ls
+
 NETWORK ID          NAME                         DRIVER              SCOPE
 99cbf6b3d074        bridge                       bridge              local
 4a2071abf006        host                         host                local
@@ -172,13 +174,13 @@ To remove networks, run `docker network rm` and provide it the network name.
 Let's rerun the `ping` container, this time assigning it a network:
 
 ```
-$ docker run --rm -d --network skynet --name dummy delner/ping:1.0
+$ docker run --rm -d --network skynet --name dummy steven/ping:v1
 ```
 
 Then the pinger, targeting the dummy `ping` container:
 
 ```
-$ docker run --rm -d --network skynet -e PING_TARGET=dummy --name pinger delner/ping:1.0
+$ docker run --rm -d --network skynet -e PING_TARGET=dummy --name pinger steven/ping:v1
 28e68fed9fe28a4346951fa8b6f4147a16f2afec8671357f1ed5f27425914b0a
 $ docker logs pinger
 PING dummy (172.26.0.2) 56(84) bytes of data.
