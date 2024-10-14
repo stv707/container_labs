@@ -13,6 +13,7 @@ Deploy a fully functional WordPress site using Docker Compose with a MySQL datab
    mkdir wordpress-compose
    cd wordpress-compose
    ```
+   >>This already exist, as sample sub directory, you can rename or copy the content from there. 
 
 2. **Define the `docker-compose.yml` File**  
    Inside the `wordpress-compose` folder, create a `docker-compose.yml` file with the following content:
