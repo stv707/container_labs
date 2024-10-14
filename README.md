@@ -19,6 +19,7 @@
 4. [Sharing images](https://github.com/stv707/container_labs/blob/main/exercises/day1/4-sharing_images/README.md)
 5. [Volumes](https://github.com/stv707/container_labs/blob/main/exercises/day1/5-volumes/README.md)
 6. [Networking](https://github.com/stv707/container_labs/blob/main/exercises/day1/6-networking/README.md)
+7. [Docker-Compose](https://github.com/stv707/container_labs/blob/main/exercises/day1/7-docker-compose/README.md)
 
 ### Exercises Day 2
 1. TODO
