@@ -30,14 +30,8 @@ Here’s a step-by-step guide to creating a Jenkins job that will build a contai
    ```
 3. Set your **GitHub credentials** if required.
 
-#### Step 3: Define Build Environment Variable
-1. Scroll down to **Build Environment** and check **Use secret text(s) or file(s)** (if necessary) to add the `BUILD_ENV` variable, or configure it as a parameter in the Jenkins job. 
-   - To add as a parameter:
-     - Check **This project is parameterized**.
-     - Select **String Parameter**, and name it `BUILD_ENV`.
-     - Set the default value to, for example, `dev`.
 
-#### Step 4: Add Build Steps to Build the Docker Image
+#### Step 3: Add Build Steps to Build the Docker Image
 1. Scroll to the **Build** section, and click on **Add build step** > **Execute shell**.
 2. In the **Command** section, add the following script:
 
@@ -45,22 +39,22 @@ Here’s a step-by-step guide to creating a Jenkins job that will build a contai
    # Navigate to the workspace where the repo is cloned
    cd $WORKSPACE
 
-   # Build the Docker image from the Dockerfile and tag it using BUILD_ENV
-   docker build -t stv707/appx:$BUILD_ENV .
+   # Build the Docker image from the Dockerfile and tag it using BUILD_ID
+   docker build -t stv707/appx:$BUILD_ID .
 
    # Stop any running container with the same name
    docker stop appx || true && docker rm appx || true
 
    # Run the newly built Docker container, exposing port 3000
-   docker run -d --name appx -p 3000:3000 stv707/appx:$BUILD_ENV
+   docker run -d --name appx -p 3000:3000 stv707/appx:$BUILD_ID
    ```
 
 This script will:
 - Navigate to the workspace where Jenkins has cloned your GitHub repo.
-- Build the Docker image from the Dockerfile, tag it with `stv707/appx:(BUILD_ENV)`.
+- Build the Docker image from the Dockerfile, tag it with `stv707/appx:(BUILD_ID)`.
 - Stop any running container named `appx`, remove it, and run the new container while exposing port 3000.
 
-#### Step 5: Save and Build the Jenkins Job
+#### Step 4: Save and Build the Jenkins Job
 1. Click **Save** to store your job configurations.
 2. To test the setup, click **Build Now** to trigger a build.
 
@@ -71,7 +65,7 @@ This script will:
 - Once the build is triggered, Jenkins will:
   1. Clone the `app-x` repo from GitHub.
   2. Use the `Dockerfile` to build the Docker image.
-  3. Tag the image as `stv707/appx:(BUILD_ENV)`.
+  3. Tag the image as `stv707/appx:(BUILD_ID)`.
   4. Run the container, exposing port 3000.
 
 ### Verifying the Container
