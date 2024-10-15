@@ -22,11 +22,11 @@
 7. [Docker-Compose](https://github.com/stv707/container_labs/blob/main/exercises/day1/7-docker-compose/README.md)
 
 ### Exercises Day 2
-1. TODO
-2. TODO
-3. TODO
-4. TODO
-5. TODO
+1. [Setup Jenkins](https://github.com/stv707/container_labs/blob/main/exercises/day2/1-setup-jenkins/README.md)
+2. [Configure Jenkins](https://github.com/stv707/container_labs/blob/main/exercises/day2/2-configure-jenkins/README.md)
+3. [Run Jenkins Pipeline](https://github.com/stv707/container_labs/blob/main/exercises/day2/3-run-jenkins-pipeline/README.md)
+4. [Git Setup](https://github.com/stv707/container_labs/blob/main/exercises/day2/4-git-setup/README.md)
+5. [Git Jenkins](https://github.com/stv707/container_labs/blob/main/exercises/day2/5-git-jenkins/README.md) 
 
 ### Exercises Day 3 
 1. TODO
