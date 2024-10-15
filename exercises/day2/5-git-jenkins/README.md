@@ -19,7 +19,7 @@ Here’s a step-by-step guide to creating a Jenkins job that will build a contai
 #### Step 1: Create a New Jenkins Job
 1. Log in to Jenkins.
 2. Click on **New Item**.
-3. Enter the job name (e.g., `Build App-X Docker`), and select **Freestyle Project**.
+3. Enter the job name (e.g., `BuildAppX`), and select **Freestyle Project**.
 4. Click **OK** to proceed.
 
 #### Step 2: Set Up Git Repository
@@ -28,7 +28,7 @@ Here’s a step-by-step guide to creating a Jenkins job that will build a contai
    ```bash
    https://github.com/stv707/app-x.git
    ```
-3. Set your **GitHub credentials** if required.
+3. Set your **Branches to build** to ***/main**
 
 
 #### Step 3: Add Build Steps to Build the Docker Image
