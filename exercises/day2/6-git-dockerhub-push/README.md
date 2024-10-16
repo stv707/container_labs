@@ -121,70 +121,71 @@ Learn how to create a Jenkins pipeline that:
 3. **Jenkinsfile Script**:
    Paste the following pipeline script into the **Pipeline script** text area.
 
-   ```groovy
-   pipeline {
-       agent any
+```groovy
+  pipeline {
+    agent any
 
-       environment {
-           // Jenkins built-in environment variables
-           GIT_REPO = 'https://github.com/your-username/apache-webserver.git'
-           IMAGE_NAME = 'your-dockerhub-username/apache-webserver'
-           TAG = "${env.BUILD_NUMBER}"
-       }
+    environment {
+        // Jenkins built-in environment variables
+        GIT_REPO = 'https://github.com/stv707/apache-webserver.git'
+        IMAGE_NAME = 'stv707/apache-webserver'
+        TAG = "${env.BUILD_NUMBER}"
+    }
 
-       stages {
-           stage('Checkout') {
-               steps {
-                   // Checkout code from GitHub
-                   git url: "${env.GIT_REPO}", branch: 'main'
-               }
-           }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from GitHub
+                git url: "${env.GIT_REPO}", branch: 'main'
+            }
+        }
 
-           stage('Build Docker Image') {
-               steps {
-                   script {
-                       // Build the Docker image
-                       dockerImage = docker.build("${env.IMAGE_NAME}:${env.TAG}")
-                   }
-               }
-           }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    dockerImage = docker.build("${env.IMAGE_NAME}:${env.TAG}")
+                    // Tag the Docker image as 'latest' locally
+                    dockerImage.tag('latest')
+                }
+            }
+        }
 
-           stage('Push Docker Image') {
-               steps {
-                   script {
-                       docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-                           // Push the Docker image to Docker Hub
-                           dockerImage.push()
-                           // Optionally, push the image with 'latest' tag
-                           dockerImage.push('latest')
-                       }
-                   }
-               }
-           }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+                        // Push the Docker image to Docker Hub
+                        dockerImage.push()
+                        // Push the image with 'latest' tag
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
 
-           stage('Cleanup') {
-               steps {
-                   script {
-                       // Remove local Docker images to free space
-                       dockerImage.inside {
-                           sh "docker rmi ${env.IMAGE_NAME}:${env.TAG}"
-                           sh "docker rmi ${env.IMAGE_NAME}:latest"
-                       }
-                   }
-               }
-           }
-       }
+        stage('Cleanup') {
+            steps {
+                script {
+                    // Remove local Docker images to free space
+                    sh "docker rmi ${env.IMAGE_NAME}:${env.TAG}"
+                    // Check if 'latest' tag exists before removing
+                    sh "docker images -q ${env.IMAGE_NAME}:latest && docker rmi ${env.IMAGE_NAME}:latest || echo 'No latest image to remove'"
+                }
+            }
+        }
+    }
 
-       post {
-           success {
-               echo "Docker image successfully built and pushed to Docker Hub."
-           }
-           failure {
-               echo "Pipeline failed. Please check the logs."
-           }
-       }
-   }
-   ```
+    post {
+        success {
+            echo "Docker image successfully built and pushed to Docker Hub."
+        }
+        failure {
+            echo "Pipeline failed. Please check the logs."
+        }
+    }
+}
+```
 
    **Notes**:
    - Replace `your-username` in `GIT_REPO` with your actual GitHub username.
