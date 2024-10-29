@@ -122,11 +122,10 @@ Learn how to create a Jenkins pipeline that:
    Paste the following pipeline script into the **Pipeline script** text area.
 
 ```groovy
-  pipeline {
+pipeline {
     agent any
 
     environment {
-        // Jenkins built-in environment variables
         GIT_REPO = 'https://github.com/stv707/apache-webserver.git'
         IMAGE_NAME = 'stv707/apache-webserver'
         TAG = "${env.BUILD_NUMBER}"
@@ -135,7 +134,6 @@ Learn how to create a Jenkins pipeline that:
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code from GitHub
                 git url: "${env.GIT_REPO}", branch: 'main'
             }
         }
@@ -143,9 +141,7 @@ Learn how to create a Jenkins pipeline that:
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image
                     dockerImage = docker.build("${env.IMAGE_NAME}:${env.TAG}")
-                    // Tag the Docker image as 'latest' locally
                     dockerImage.tag('latest')
                 }
             }
@@ -155,30 +151,63 @@ Learn how to create a Jenkins pipeline that:
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-                        // Push the Docker image to Docker Hub
                         dockerImage.push()
-                        // Push the image with 'latest' tag
                         dockerImage.push('latest')
                     }
                 }
             }
         }
 
-        stage('Cleanup') {
+        stage('Stop and Remove Existing Container') {
             steps {
                 script {
-                    // Remove local Docker images to free space
-                    sh "docker rmi ${env.IMAGE_NAME}:${env.TAG}"
-                    // Check if 'latest' tag exists before removing
-                    sh "docker images -q ${env.IMAGE_NAME}:latest && docker rmi ${env.IMAGE_NAME}:latest || echo 'No latest image to remove'"
+                    def containerName = 'apache-webserver'
+            
+            // Check if the container is running
+                    def isRunning = sh(script: "docker ps -q --filter 'name=${containerName}'", returnStatus: true) == 0
+            
+            // Stop and remove the container if it exists, else print a warning
+                    if (isRunning) {
+                        sh "docker stop ${containerName} || echo 'Container not running'"
+                        sh "docker rm ${containerName} || echo 'Container not found'"
+                    } else {
+                        echo "No running container named ${containerName} to stop."
+            }
+        }
+    }
+}
+
+
+        stage('Run New Container') {
+            steps {
+                script {
+                    def containerName = 'apache-webserver'
+                    sh "docker run -d --name ${containerName} -p 80:80 ${env.IMAGE_NAME}:${env.TAG}"
                 }
             }
         }
+
+       stage('Cleanup') {
+             steps {
+                 script {
+                      // Only remove the specific build tag, not the 'latest' tag to prevent issues
+                     sh "docker rmi ${env.IMAGE_NAME}:${env.TAG} || echo 'Image not found or is in use'"
+            
+                    // Verify if 'latest' tag is used by running containers before removing
+                    def inUse = sh(script: "docker ps --filter 'ancestor=${env.IMAGE_NAME}:latest' -q", returnStatus: true) == 0
+                    if (!inUse) {
+                        sh "docker images -q ${env.IMAGE_NAME}:latest && docker rmi ${env.IMAGE_NAME}:latest || echo 'No latest image to remove'"
+                    } else {
+                        echo "'latest' tag is in use, skipping image removal for 'latest'"
+            }
+        }
+    }
+}
     }
 
     post {
         success {
-            echo "Docker image successfully built and pushed to Docker Hub."
+            echo "Docker image successfully built, pushed, and container is running."
         }
         failure {
             echo "Pipeline failed. Please check the logs."
