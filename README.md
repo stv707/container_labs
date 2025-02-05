@@ -1,6 +1,6 @@
 # Containers, Docker, and DevOps Integration with Jenkins Training
 ### This repo is for 3 days Training Delivery of Container
->> This repo will be going Offline on 16th Oct 6pm GMT +8
+
 
 ### Before you get started...you need to have:>
 
